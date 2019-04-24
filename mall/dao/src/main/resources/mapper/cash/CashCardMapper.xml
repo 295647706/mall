@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.user.CashCardMapper">
+
+    <resultMap id="userCashCardMap" type="hashmap">
+        <result column="id" property="id"/>
+        <result column="amount" property="amount"/>
+    </resultMap>
+
+    <select id="getUserCashCard" resultMap="userCashCardMap">
+        select id,amount from tbl_cash_card where deleted = 0 and user_id = #{userId}
+    </select>
+</mapper>

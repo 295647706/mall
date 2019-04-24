@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.order.TblOrderComplainDao">
+	
+	<resultMap id="RM_TblOrderComplain" type="com.entity.TblOrderComplain">
+			<result property="id" column="id"/>
+			<result property="createTime" column="create_time"/>
+			<result property="deleted" column="deleted"/>
+			<result property="operatorId" column="operator_id"/>
+			<result property="operatorName" column="operator_name"/>
+			<result property="updateTime" column="update_time"/>
+			<result property="describtion" column="describtion"/>
+			<result property="orderId" column="order_id"/>
+			<result property="reason" column="reason"/>
+			<result property="remark" column="remark"/>
+			<result property="state" column="state"/>
+			<result property="type" column="type"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="TblOrderComplain_columns">
+	    <![CDATA[
+			`id`, 			
+			`create_time`, 			
+			`deleted`, 			
+			`operator_id`, 			
+			`operator_name`, 			
+			`update_time`, 			
+			`describtion`, 			
+			`order_id`, 			
+			`reason`, 			
+			`remark`, 			
+			`state`, 			
+			`type`			
+	    ]]>
+	</sql>
+	
+	<!-- 用于where查询公用抽取的列 -->
+	<sql id="TblOrderComplain_condition">
+		<where>
+        <trim suffix="" suffixOverrides="and">
+			<if test="createTime != null and createTime != 0 ">
+				`create_time` = #{createTime} and 			
+			</if>
+			<if test="deleted != null and deleted != 0 ">
+				`deleted` = #{deleted} and 			
+			</if>
+			<if test="operatorId != null and operatorId != 0 ">
+				`operator_id` = #{operatorId} and 			
+			</if>
+			<if test="operatorName != null and operatorName != ''">
+				`operator_name` = #{operatorName} and 			
+			</if>
+			<if test="updateTime != null and updateTime != 0 ">
+				`update_time` = #{updateTime} and 			
+			</if>
+			<if test="describtion != null and describtion != ''">
+				`describtion` = #{describtion} and 			
+			</if>
+			<if test="orderId != null and orderId != 0 ">
+				`order_id` = #{orderId} and 			
+			</if>
+			<if test="reason != null and reason != ''">
+				`reason` = #{reason} and 			
+			</if>
+			<if test="remark != null and remark != ''">
+				`remark` = #{remark} and 			
+			</if>
+			<if test="state != null and state != 0 ">
+				`state` = #{state} and 			
+			</if>
+			<if test="type != null and type != 0 ">
+				`type` = #{type}			
+			</if>
+        </trim>
+		</where>
+	</sql>
+	
+	<select id="queryObject" resultMap="RM_TblOrderComplain">
+		select 
+		<include refid="TblOrderComplain_columns" />
+		from tbl_order_complain 
+		where
+		id = #{value}
+	</select>
+
+	<select id="queryList" resultMap="RM_TblOrderComplain">
+		select 
+		<include refid="TblOrderComplain_columns" />
+		from tbl_order_complain
+		<include refid="TblOrderComplain_condition"/> 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="java.lang.Integer">
+		select 
+		count(1) 
+		from tbl_order_complain 
+		<include refid="TblOrderComplain_condition"/>
+	</select>
+	 
+	<insert id="save" parameterType="com.entity.TblOrderComplain">
+		insert into tbl_order_complain
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="id !=null and id != 0 ">
+				id, 			
+			</if>
+			<if test="createTime !=null and createTime != 0 ">
+				create_time, 			
+			</if>
+			<if test="deleted !=null and deleted != 0 ">
+				deleted, 			
+			</if>
+			<if test="operatorId !=null and operatorId != 0 ">
+				operator_id, 			
+			</if>
+			<if test="operatorName !=null and operatorName != ''">
+				operator_name, 			
+			</if>
+			<if test="updateTime !=null and updateTime != 0 ">
+				update_time, 			
+			</if>
+			<if test="describtion !=null and describtion != ''">
+				describtion, 			
+			</if>
+			<if test="orderId !=null and orderId != 0 ">
+				order_id, 			
+			</if>
+			<if test="reason !=null and reason != ''">
+				reason, 			
+			</if>
+			<if test="remark !=null and remark != ''">
+				remark, 			
+			</if>
+			<if test="state !=null and state != 0 ">
+				state, 			
+			</if>
+			<if test="type !=null and type != 0 ">
+				type			
+			</if>
+	     </trim>
+		)
+		values
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="id !=null and id != 0 ">
+				#{id}, 			
+			</if>
+			<if test="createTime !=null and createTime != 0 ">
+				#{createTime}, 			
+			</if>
+			<if test="deleted !=null and deleted != 0 ">
+				#{deleted}, 			
+			</if>
+			<if test="operatorId !=null and operatorId != 0 ">
+				#{operatorId}, 			
+			</if>
+			<if test="operatorName !=null and operatorName != ''">
+				#{operatorName}, 			
+			</if>
+			<if test="updateTime !=null and updateTime != 0 ">
+				#{updateTime}, 			
+			</if>
+			<if test="describtion !=null and describtion != ''">
+				#{describtion}, 			
+			</if>
+			<if test="orderId !=null and orderId != 0 ">
+				#{orderId}, 			
+			</if>
+			<if test="reason !=null and reason != ''">
+				#{reason}, 			
+			</if>
+			<if test="remark !=null and remark != ''">
+				#{remark}, 			
+			</if>
+			<if test="state !=null and state != 0 ">
+				#{state}, 			
+			</if>
+			<if test="type !=null and type != 0 ">
+				#{type}			
+			</if>
+	     </trim>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.entity.TblOrderComplain">
+		update tbl_order_complain 
+		<set>
+			<if test="createTime != null and createTime != 0 ">
+				`create_time` = #{createTime}, 			
+			</if>
+			<if test="deleted != null and deleted != 0 ">
+				`deleted` = #{deleted}, 			
+			</if>
+			<if test="operatorId != null and operatorId != 0 ">
+				`operator_id` = #{operatorId}, 			
+			</if>
+			<if test="operatorName != null and operatorName != ''">
+				`operator_name` = #{operatorName}, 			
+			</if>
+			<if test="updateTime != null and updateTime != 0 ">
+				`update_time` = #{updateTime}, 			
+			</if>
+			<if test="describtion != null and describtion != ''">
+				`describtion` = #{describtion}, 			
+			</if>
+			<if test="orderId != null and orderId != 0 ">
+				`order_id` = #{orderId}, 			
+			</if>
+			<if test="reason != null and reason != ''">
+				`reason` = #{reason}, 			
+			</if>
+			<if test="remark != null and remark != ''">
+				`remark` = #{remark}, 			
+			</if>
+			<if test="state != null and state != 0 ">
+				`state` = #{state}, 			
+			</if>
+			<if test="type != null and type != 0 ">
+				`type` = #{type}			
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from tbl_order_complain where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from tbl_order_complain where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

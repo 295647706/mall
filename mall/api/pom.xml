@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>com.mall</groupId>
+		<artifactId>mall</artifactId>
+		<version>0.0.1</version>
+	</parent>
+
+	<artifactId>api</artifactId>
+	<name>${project.artifactId}</name>
+	<packaging>war</packaging>
+
+	<dependencies>
+		<dependency>																							<!-- service模块已经依赖dao model common -->
+			<groupId>${project.parent.groupId}</groupId>
+			<artifactId>service</artifactId>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-pool2</artifactId>
+		</dependency>
+		
+		<!-- 添加依赖后应用自动启用安全限制，并且默认启用basic认证 -->
+		<!-- 默认的AuthenticationManager有一个用户，名为user, 密码会打印在log中，也可设置security.user.password属性修改密码 -->
+		<!-- 也可以@EnableWebSecurity实现 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>  
+           <groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+       	</dependency>
+
+
+
+    
+	<dependency>
+		<groupId>com.alibaba</groupId>
+		<artifactId>fastjson</artifactId>
+		<version>1.2.28</version>
+	</dependency>
+       	
+       	<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	
+	<profiles>
+		<profile>
+			<id>dev</id>																						<!-- 开发环境 -->
+			<properties>
+				<profiles.active>dev</profiles.active>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>															<!-- 默认激活 -->
+			</activation>
+		</profile>
+		<profile>
+			<id>test</id>																						<!-- 测试环境 -->
+			<properties>
+				<profiles.active>test</profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>																						<!-- 生产环境 -->
+			<properties>
+				<profiles.active>prod</profiles.active>
+			</properties>
+		</profile>
+	</profiles>
+	
+	<build>
+		<resources>
+			<resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes><!-- 资源根目录排除各环境的配置，防止在生成目录中多余其它目录 -->
+					<!-- <exclude>dev/**/*.*</exclude> -->
+					<exclude>dev/*</exclude>
+					<exclude>test/*</exclude>
+					<exclude>prod/*</exclude>
+				</excludes>
+            </resource>
+			<resource>
+                <directory>src/main/resources/${profiles.active}</directory>
+            </resource>
+		</resources>
+	
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<!-- 过滤后缀为pem、pfx、p12文件 -->
+					<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>pem</nonFilteredFileExtension>
+						<nonFilteredFileExtension>pfx</nonFilteredFileExtension>
+						<nonFilteredFileExtension>p12</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
+				</configuration>
+			</plugin>
+			
+			<!-- 打war包时把本地包打进来 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<warName>${project.name}</warName>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<!-- 本地包
+					<webResources>
+						<resource>
+							<directory>${project.basedir}/src/lib</directory>
+							<targetPath>WEB-INF/lib</targetPath>
+							<filtering>false</filtering>
+							<includes>
+								<include>**/*.jar</include>
+							</includes>
+						</resource>
+					</webResources>
+					 -->
+					
+					<webappDirectory>${project.build.directory}/WebContent</webappDirectory>
+					<outputDirectory>${project.build.directory}/wars</outputDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

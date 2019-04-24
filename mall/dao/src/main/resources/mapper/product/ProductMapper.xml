@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.product.ProductMapper">
+
+    <resultMap id="productMapList" type="hashmap">
+        <result column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="sub_title" property="subTitle"/>
+        <result column="path" property="imagePath"/>
+        <result column="current_price" property="currentPrice"/>
+        <result column="postage" property="postage"/>
+        <result column="pay_num" property="payNum"/>
+    </resultMap>
+
+    <select id="findProductPageByBrandId" resultMap="productMapList">
+        SELECT
+            product.id,
+            product.title,
+            product.sub_title,
+            image.path,
+            product.current_price,
+            product.postage,
+            product.pay_num
+        FROM
+            tbl_product product
+        LEFT JOIN tbl_product_image image on image.product_id = product.id
+        WHERE
+            product.brand_id = #{brandId}
+    </select>
+    <select id="findProductPageByKeyword" resultMap="productMapList">
+        SELECT
+            product.id,
+            product.title,
+            product.sub_title,
+            image.path,
+            product.current_price,
+            product.postage,
+            product.pay_num
+        FROM
+            tbl_product product
+        LEFT JOIN tbl_product_image image on image.product_id = product.id
+        WHERE
+            product.keywords like concat('%',#{keyword},'%')
+    </select>
+
+</mapper>

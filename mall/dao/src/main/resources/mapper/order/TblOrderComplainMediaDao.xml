@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.order.TblOrderComplainMediaDao">
+	
+	<resultMap id="RM_TblOrderComplainMedia" type="com.entity.TblOrderComplainMedia">
+			<result property="id" column="id"/>
+			<result property="createTime" column="create_time"/>
+			<result property="deleted" column="deleted"/>
+			<result property="operatorId" column="operator_id"/>
+			<result property="operatorName" column="operator_name"/>
+			<result property="updateTime" column="update_time"/>
+			<result property="orderComplainId" column="order_complain_id"/>
+			<result property="path" column="path"/>
+			<result property="sort" column="sort"/>
+			<result property="type" column="type"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="TblOrderComplainMedia_columns">
+	    <![CDATA[
+			`id`, 			
+			`create_time`, 			
+			`deleted`, 			
+			`operator_id`, 			
+			`operator_name`, 			
+			`update_time`, 			
+			`order_complain_id`, 			
+			`path`, 			
+			`sort`, 			
+			`type`			
+	    ]]>
+	</sql>
+	
+	<!-- 用于where查询公用抽取的列 -->
+	<sql id="TblOrderComplainMedia_condition">
+		<where>
+        <trim suffix="" suffixOverrides="and">
+			<if test="createTime != null and createTime != 0 ">
+				`create_time` = #{createTime} and 			
+			</if>
+			<if test="deleted != null and deleted != 0 ">
+				`deleted` = #{deleted} and 			
+			</if>
+			<if test="operatorId != null and operatorId != 0 ">
+				`operator_id` = #{operatorId} and 			
+			</if>
+			<if test="operatorName != null and operatorName != ''">
+				`operator_name` = #{operatorName} and 			
+			</if>
+			<if test="updateTime != null and updateTime != 0 ">
+				`update_time` = #{updateTime} and 			
+			</if>
+			<if test="orderComplainId != null and orderComplainId != 0 ">
+				`order_complain_id` = #{orderComplainId} and 			
+			</if>
+			<if test="path != null and path != ''">
+				`path` = #{path} and 			
+			</if>
+			<if test="sort != null and sort != 0 ">
+				`sort` = #{sort} and 			
+			</if>
+			<if test="type != null and type != 0 ">
+				`type` = #{type}			
+			</if>
+        </trim>
+		</where>
+	</sql>
+	
+	<select id="queryObject" resultMap="RM_TblOrderComplainMedia">
+		select 
+		<include refid="TblOrderComplainMedia_columns" />
+		from tbl_order_complain_media 
+		where
+		id = #{value}
+	</select>
+
+	<select id="queryList" resultMap="RM_TblOrderComplainMedia">
+		select 
+		<include refid="TblOrderComplainMedia_columns" />
+		from tbl_order_complain_media
+		<include refid="TblOrderComplainMedia_condition"/> 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="java.lang.Integer">
+		select 
+		count(1) 
+		from tbl_order_complain_media 
+		<include refid="TblOrderComplainMedia_condition"/>
+	</select>
+	 
+	<insert id="save" parameterType="com.entity.TblOrderComplainMedia">
+		insert into tbl_order_complain_media
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="id !=null and id != 0 ">
+				id, 			
+			</if>
+			<if test="createTime !=null and createTime != 0 ">
+				create_time, 			
+			</if>
+			<if test="deleted !=null and deleted != 0 ">
+				deleted, 			
+			</if>
+			<if test="operatorId !=null and operatorId != 0 ">
+				operator_id, 			
+			</if>
+			<if test="operatorName !=null and operatorName != ''">
+				operator_name, 			
+			</if>
+			<if test="updateTime !=null and updateTime != 0 ">
+				update_time, 			
+			</if>
+			<if test="orderComplainId !=null and orderComplainId != 0 ">
+				order_complain_id, 			
+			</if>
+			<if test="path !=null and path != ''">
+				path, 			
+			</if>
+			<if test="sort !=null and sort != 0 ">
+				sort, 			
+			</if>
+			<if test="type !=null and type != 0 ">
+				type			
+			</if>
+	     </trim>
+		)
+		values
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="id !=null and id != 0 ">
+				#{id}, 			
+			</if>
+			<if test="createTime !=null and createTime != 0 ">
+				#{createTime}, 			
+			</if>
+			<if test="deleted !=null and deleted != 0 ">
+				#{deleted}, 			
+			</if>
+			<if test="operatorId !=null and operatorId != 0 ">
+				#{operatorId}, 			
+			</if>
+			<if test="operatorName !=null and operatorName != ''">
+				#{operatorName}, 			
+			</if>
+			<if test="updateTime !=null and updateTime != 0 ">
+				#{updateTime}, 			
+			</if>
+			<if test="orderComplainId !=null and orderComplainId != 0 ">
+				#{orderComplainId}, 			
+			</if>
+			<if test="path !=null and path != ''">
+				#{path}, 			
+			</if>
+			<if test="sort !=null and sort != 0 ">
+				#{sort}, 			
+			</if>
+			<if test="type !=null and type != 0 ">
+				#{type}			
+			</if>
+	     </trim>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.entity.TblOrderComplainMedia">
+		update tbl_order_complain_media 
+		<set>
+			<if test="createTime != null and createTime != 0 ">
+				`create_time` = #{createTime}, 			
+			</if>
+			<if test="deleted != null and deleted != 0 ">
+				`deleted` = #{deleted}, 			
+			</if>
+			<if test="operatorId != null and operatorId != 0 ">
+				`operator_id` = #{operatorId}, 			
+			</if>
+			<if test="operatorName != null and operatorName != ''">
+				`operator_name` = #{operatorName}, 			
+			</if>
+			<if test="updateTime != null and updateTime != 0 ">
+				`update_time` = #{updateTime}, 			
+			</if>
+			<if test="orderComplainId != null and orderComplainId != 0 ">
+				`order_complain_id` = #{orderComplainId}, 			
+			</if>
+			<if test="path != null and path != ''">
+				`path` = #{path}, 			
+			</if>
+			<if test="sort != null and sort != 0 ">
+				`sort` = #{sort}, 			
+			</if>
+			<if test="type != null and type != 0 ">
+				`type` = #{type}			
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from tbl_order_complain_media where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from tbl_order_complain_media where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

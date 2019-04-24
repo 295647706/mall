@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.order.TblOrderProductDao">
+	
+	<resultMap id="RM_TblOrderProduct" type="com.entity.TblOrderProduct">
+			<result property="id" column="id"/>
+			<result property="createTime" column="create_time"/>
+			<result property="deleted" column="deleted"/>
+			<result property="operatorId" column="operator_id"/>
+			<result property="operatorName" column="operator_name"/>
+			<result property="updateTime" column="update_time"/>
+			<result property="buyNum" column="buy_num"/>
+			<result property="couponPay" column="coupon_pay"/>
+			<result property="freight" column="freight"/>
+			<result property="goldPay" column="gold_pay"/>
+			<result property="integralPay" column="integral_pay"/>
+			<result property="moneyPay" column="money_pay"/>
+			<result property="orderId" column="order_id"/>
+			<result property="originalPrice" column="original_price"/>
+			<result property="payPrice" column="pay_price"/>
+			<result property="productId" column="product_id"/>
+			<result property="productSkuId" column="product_sku_id"/>
+			<result property="productSkus" column="product_skus"/>
+			<result property="productSubTitle" column="product_sub_title"/>
+			<result property="productTitle" column="product_title"/>
+			<result property="realPay" column="real_pay"/>
+			<result property="shopDeleted" column="shop_deleted"/>
+			<result property="shopDeletedTime" column="shop_deleted_time"/>
+			<result property="shopId" column="shop_id"/>
+			<result property="shopName" column="shop_name"/>
+			<result property="userDeleted" column="user_deleted"/>
+			<result property="userDeletedTime" column="user_deleted_time"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="TblOrderProduct_columns">
+	    <![CDATA[
+			`id`, 			
+			`create_time`, 			
+			`deleted`, 			
+			`operator_id`, 			
+			`operator_name`, 			
+			`update_time`, 			
+			`buy_num`, 			
+			`coupon_pay`, 			
+			`freight`, 			
+			`gold_pay`, 			
+			`integral_pay`, 			
+			`money_pay`, 			
+			`order_id`, 			
+			`original_price`, 			
+			`pay_price`, 			
+			`product_id`, 			
+			`product_sku_id`, 			
+			`product_skus`, 			
+			`product_sub_title`, 			
+			`product_title`, 			
+			`real_pay`, 			
+			`shop_deleted`, 			
+			`shop_deleted_time`, 			
+			`shop_id`, 			
+			`shop_name`, 			
+			`user_deleted`, 			
+			`user_deleted_time`			
+	    ]]>
+	</sql>
+	
+	<!-- 用于where查询公用抽取的列 -->
+	<sql id="TblOrderProduct_condition">
+		<where>
+        <trim suffix="" suffixOverrides="and">
+			<if test="createTime != null and createTime != 0 ">
+				`create_time` = #{createTime} and 			
+			</if>
+			<if test="deleted != null and deleted != 0 ">
+				`deleted` = #{deleted} and 			
+			</if>
+			<if test="operatorId != null and operatorId != 0 ">
+				`operator_id` = #{operatorId} and 			
+			</if>
+			<if test="operatorName != null and operatorName != ''">
+				`operator_name` = #{operatorName} and 			
+			</if>
+			<if test="updateTime != null and updateTime != 0 ">
+				`update_time` = #{updateTime} and 			
+			</if>
+			<if test="buyNum != null and buyNum != 0 ">
+				`buy_num` = #{buyNum} and 			
+			</if>
+			<if test="couponPay != null and couponPay != 0 ">
+				`coupon_pay` = #{couponPay} and 			
+			</if>
+			<if test="freight != null and freight != 0 ">
+				`freight` = #{freight} and 			
+			</if>
+			<if test="goldPay != null and goldPay != 0 ">
+				`gold_pay` = #{goldPay} and 			
+			</if>
+			<if test="integralPay != null and integralPay != 0 ">
+				`integral_pay` = #{integralPay} and 			
+			</if>
+			<if test="moneyPay != null and moneyPay != 0 ">
+				`money_pay` = #{moneyPay} and 			
+			</if>
+			<if test="orderId != null and orderId != 0 ">
+				`order_id` = #{orderId} and 			
+			</if>
+			<if test="originalPrice != null and originalPrice != 0 ">
+				`original_price` = #{originalPrice} and 			
+			</if>
+			<if test="payPrice != null and payPrice != 0 ">
+				`pay_price` = #{payPrice} and 			
+			</if>
+			<if test="productId != null and productId != 0 ">
+				`product_id` = #{productId} and 			
+			</if>
+			<if test="productSkuId != null and productSkuId != 0 ">
+				`product_sku_id` = #{productSkuId} and 			
+			</if>
+			<if test="productSkus != null and productSkus != ''">
+				`product_skus` = #{productSkus} and 			
+			</if>
+			<if test="productSubTitle != null and productSubTitle != ''">
+				`product_sub_title` = #{productSubTitle} and 			
+			</if>
+			<if test="productTitle != null and productTitle != ''">
+				`product_title` = #{productTitle} and 			
+			</if>
+			<if test="realPay != null and realPay != 0 ">
+				`real_pay` = #{realPay} and 			
+			</if>
+			<if test="shopDeleted != null and shopDeleted != 0 ">
+				`shop_deleted` = #{shopDeleted} and 			
+			</if>
+			<if test="shopDeletedTime != null and shopDeletedTime != 0 ">
+				`shop_deleted_time` = #{shopDeletedTime} and 			
+			</if>
+			<if test="shopId != null and shopId != 0 ">
+				`shop_id` = #{shopId} and 			
+			</if>
+			<if test="shopName != null and shopName != ''">
+				`shop_name` = #{shopName} and 			
+			</if>
+			<if test="userDeleted != null and userDeleted != 0 ">
+				`user_deleted` = #{userDeleted} and 			
+			</if>
+			<if test="userDeletedTime != null and userDeletedTime != 0 ">
+				`user_deleted_time` = #{userDeletedTime}			
+			</if>
+        </trim>
+		</where>
+	</sql>
+	
+	<select id="queryObject" resultMap="RM_TblOrderProduct">
+		select 
+		<include refid="TblOrderProduct_columns" />
+		from tbl_order_product 
+		where
+		id = #{value}
+	</select>
+
+	<select id="queryList" resultMap="RM_TblOrderProduct">
+		select 
+		<include refid="TblOrderProduct_columns" />
+		from tbl_order_product
+		<include refid="TblOrderProduct_condition"/> 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="java.lang.Integer">
+		select 
+		count(1) 
+		from tbl_order_product 
+		<include refid="TblOrderProduct_condition"/>
+	</select>
+	 
+	<insert id="save" parameterType="com.entity.TblOrderProduct">
+		insert into tbl_order_product
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="id !=null and id != 0 ">
+				id, 			
+			</if>
+			<if test="createTime !=null and createTime != 0 ">
+				create_time, 			
+			</if>
+			<if test="deleted !=null and deleted != 0 ">
+				deleted, 			
+			</if>
+			<if test="operatorId !=null and operatorId != 0 ">
+				operator_id, 			
+			</if>
+			<if test="operatorName !=null and operatorName != ''">
+				operator_name, 			
+			</if>
+			<if test="updateTime !=null and updateTime != 0 ">
+				update_time, 			
+			</if>
+			<if test="buyNum !=null and buyNum != 0 ">
+				buy_num, 			
+			</if>
+			<if test="couponPay !=null and couponPay != 0 ">
+				coupon_pay, 			
+			</if>
+			<if test="freight !=null and freight != 0 ">
+				freight, 			
+			</if>
+			<if test="goldPay !=null and goldPay != 0 ">
+				gold_pay, 			
+			</if>
+			<if test="integralPay !=null and integralPay != 0 ">
+				integral_pay, 			
+			</if>
+			<if test="moneyPay !=null and moneyPay != 0 ">
+				money_pay, 			
+			</if>
+			<if test="orderId !=null and orderId != 0 ">
+				order_id, 			
+			</if>
+			<if test="originalPrice !=null and originalPrice != 0 ">
+				original_price, 			
+			</if>
+			<if test="payPrice !=null and payPrice != 0 ">
+				pay_price, 			
+			</if>
+			<if test="productId !=null and productId != 0 ">
+				product_id, 			
+			</if>
+			<if test="productSkuId !=null and productSkuId != 0 ">
+				product_sku_id, 			
+			</if>
+			<if test="productSkus !=null and productSkus != ''">
+				product_skus, 			
+			</if>
+			<if test="productSubTitle !=null and productSubTitle != ''">
+				product_sub_title, 			
+			</if>
+			<if test="productTitle !=null and productTitle != ''">
+				product_title, 			
+			</if>
+			<if test="realPay !=null and realPay != 0 ">
+				real_pay, 			
+			</if>
+			<if test="shopDeleted !=null and shopDeleted != 0 ">
+				shop_deleted, 			
+			</if>
+			<if test="shopDeletedTime !=null and shopDeletedTime != 0 ">
+				shop_deleted_time, 			
+			</if>
+			<if test="shopId !=null and shopId != 0 ">
+				shop_id, 			
+			</if>
+			<if test="shopName !=null and shopName != ''">
+				shop_name, 			
+			</if>
+			<if test="userDeleted !=null and userDeleted != 0 ">
+				user_deleted, 			
+			</if>
+			<if test="userDeletedTime !=null and userDeletedTime != 0 ">
+				user_deleted_time			
+			</if>
+	     </trim>
+		)
+		values
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="id !=null and id != 0 ">
+				#{id}, 			
+			</if>
+			<if test="createTime !=null and createTime != 0 ">
+				#{createTime}, 			
+			</if>
+			<if test="deleted !=null and deleted != 0 ">
+				#{deleted}, 			
+			</if>
+			<if test="operatorId !=null and operatorId != 0 ">
+				#{operatorId}, 			
+			</if>
+			<if test="operatorName !=null and operatorName != ''">
+				#{operatorName}, 			
+			</if>
+			<if test="updateTime !=null and updateTime != 0 ">
+				#{updateTime}, 			
+			</if>
+			<if test="buyNum !=null and buyNum != 0 ">
+				#{buyNum}, 			
+			</if>
+			<if test="couponPay !=null and couponPay != 0 ">
+				#{couponPay}, 			
+			</if>
+			<if test="freight !=null and freight != 0 ">
+				#{freight}, 			
+			</if>
+			<if test="goldPay !=null and goldPay != 0 ">
+				#{goldPay}, 			
+			</if>
+			<if test="integralPay !=null and integralPay != 0 ">
+				#{integralPay}, 			
+			</if>
+			<if test="moneyPay !=null and moneyPay != 0 ">
+				#{moneyPay}, 			
+			</if>
+			<if test="orderId !=null and orderId != 0 ">
+				#{orderId}, 			
+			</if>
+			<if test="originalPrice !=null and originalPrice != 0 ">
+				#{originalPrice}, 			
+			</if>
+			<if test="payPrice !=null and payPrice != 0 ">
+				#{payPrice}, 			
+			</if>
+			<if test="productId !=null and productId != 0 ">
+				#{productId}, 			
+			</if>
+			<if test="productSkuId !=null and productSkuId != 0 ">
+				#{productSkuId}, 			
+			</if>
+			<if test="productSkus !=null and productSkus != ''">
+				#{productSkus}, 			
+			</if>
+			<if test="productSubTitle !=null and productSubTitle != ''">
+				#{productSubTitle}, 			
+			</if>
+			<if test="productTitle !=null and productTitle != ''">
+				#{productTitle}, 			
+			</if>
+			<if test="realPay !=null and realPay != 0 ">
+				#{realPay}, 			
+			</if>
+			<if test="shopDeleted !=null and shopDeleted != 0 ">
+				#{shopDeleted}, 			
+			</if>
+			<if test="shopDeletedTime !=null and shopDeletedTime != 0 ">
+				#{shopDeletedTime}, 			
+			</if>
+			<if test="shopId !=null and shopId != 0 ">
+				#{shopId}, 			
+			</if>
+			<if test="shopName !=null and shopName != ''">
+				#{shopName}, 			
+			</if>
+			<if test="userDeleted !=null and userDeleted != 0 ">
+				#{userDeleted}, 			
+			</if>
+			<if test="userDeletedTime !=null and userDeletedTime != 0 ">
+				#{userDeletedTime}			
+			</if>
+	     </trim>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.entity.TblOrderProduct">
+		update tbl_order_product 
+		<set>
+			<if test="createTime != null and createTime != 0 ">
+				`create_time` = #{createTime}, 			
+			</if>
+			<if test="deleted != null and deleted != 0 ">
+				`deleted` = #{deleted}, 			
+			</if>
+			<if test="operatorId != null and operatorId != 0 ">
+				`operator_id` = #{operatorId}, 			
+			</if>
+			<if test="operatorName != null and operatorName != ''">
+				`operator_name` = #{operatorName}, 			
+			</if>
+			<if test="updateTime != null and updateTime != 0 ">
+				`update_time` = #{updateTime}, 			
+			</if>
+			<if test="buyNum != null and buyNum != 0 ">
+				`buy_num` = #{buyNum}, 			
+			</if>
+			<if test="couponPay != null and couponPay != 0 ">
+				`coupon_pay` = #{couponPay}, 			
+			</if>
+			<if test="freight != null and freight != 0 ">
+				`freight` = #{freight}, 			
+			</if>
+			<if test="goldPay != null and goldPay != 0 ">
+				`gold_pay` = #{goldPay}, 			
+			</if>
+			<if test="integralPay != null and integralPay != 0 ">
+				`integral_pay` = #{integralPay}, 			
+			</if>
+			<if test="moneyPay != null and moneyPay != 0 ">
+				`money_pay` = #{moneyPay}, 			
+			</if>
+			<if test="orderId != null and orderId != 0 ">
+				`order_id` = #{orderId}, 			
+			</if>
+			<if test="originalPrice != null and originalPrice != 0 ">
+				`original_price` = #{originalPrice}, 			
+			</if>
+			<if test="payPrice != null and payPrice != 0 ">
+				`pay_price` = #{payPrice}, 			
+			</if>
+			<if test="productId != null and productId != 0 ">
+				`product_id` = #{productId}, 			
+			</if>
+			<if test="productSkuId != null and productSkuId != 0 ">
+				`product_sku_id` = #{productSkuId}, 			
+			</if>
+			<if test="productSkus != null and productSkus != ''">
+				`product_skus` = #{productSkus}, 			
+			</if>
+			<if test="productSubTitle != null and productSubTitle != ''">
+				`product_sub_title` = #{productSubTitle}, 			
+			</if>
+			<if test="productTitle != null and productTitle != ''">
+				`product_title` = #{productTitle}, 			
+			</if>
+			<if test="realPay != null and realPay != 0 ">
+				`real_pay` = #{realPay}, 			
+			</if>
+			<if test="shopDeleted != null and shopDeleted != 0 ">
+				`shop_deleted` = #{shopDeleted}, 			
+			</if>
+			<if test="shopDeletedTime != null and shopDeletedTime != 0 ">
+				`shop_deleted_time` = #{shopDeletedTime}, 			
+			</if>
+			<if test="shopId != null and shopId != 0 ">
+				`shop_id` = #{shopId}, 			
+			</if>
+			<if test="shopName != null and shopName != ''">
+				`shop_name` = #{shopName}, 			
+			</if>
+			<if test="userDeleted != null and userDeleted != 0 ">
+				`user_deleted` = #{userDeleted}, 			
+			</if>
+			<if test="userDeletedTime != null and userDeletedTime != 0 ">
+				`user_deleted_time` = #{userDeletedTime}			
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from tbl_order_product where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from tbl_order_product where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

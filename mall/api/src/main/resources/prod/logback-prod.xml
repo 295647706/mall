@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property resource="application.properties"/>																<!-- 引用文件，才可以使用文件的变量值 -->
+	<property resource="application-prod.properties"/>
+	<property name="PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-6level%c [%L]-| %msg%n"/>				<!-- 文件输出格式 -->
+	
+	<contextName>${spring.application.name}</contextName>														<!-- 上下文名称 -->
+	
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">								<!-- 每天产生一个文件 -->
+		<file>${log.file.path}/${log.file.name}.log</file>														<!-- 日志文件 -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.file.path}/${log.file.name}.%d{yyyy-MM-dd}.log</fileNamePattern>				<!-- 文件名称 -->
+			<MaxHistory>15</MaxHistory>																			<!-- 文件最大保存历史数量 -->
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout"><pattern>${PATTERN}</pattern></layout>
+	</appender>
+	
+	<logger name="org.springframework" level="${log.level.springframework}"/>									<!-- 指定某个包的日志级别 -->
+	<logger name="org.hibernate" level="${log.level.hibernate}"/>
+	<logger name="com.api.interceptor.GlobalInterceptor" level="${log.level.globalInterceptor}"/>
+	<root level="${log.level.root}">
+		<appender-ref ref="FILE"/>
+	</root>
+</configuration>

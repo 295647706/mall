@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.order.TblOrderDao">
+	
+	<resultMap id="RM_TblOrder" type="com.entity.TblOrder">
+			<result property="id" column="id"/>
+			<result property="createTime" column="create_time"/>
+			<result property="deleted" column="deleted"/>
+			<result property="operatorId" column="operator_id"/>
+			<result property="operatorName" column="operator_name"/>
+			<result property="updateTime" column="update_time"/>
+			<result property="buyNum" column="buy_num"/>
+			<result property="cancelReason" column="cancel_reason"/>
+			<result property="cancelTime" column="cancel_time"/>
+			<result property="cancelType" column="cancel_type"/>
+			<result property="collageId" column="collage_id"/>
+			<result property="collageMaxNum" column="collage_max_num"/>
+			<result property="collageMinNum" column="collage_min_num"/>
+			<result property="couponPay" column="coupon_pay"/>
+			<result property="deliveryTime" column="delivery_time"/>
+			<result property="freight" column="freight"/>
+			<result property="goldPay" column="gold_pay"/>
+			<result property="integralPay" column="integral_pay"/>
+			<result property="moneyPay" column="money_pay"/>
+			<result property="orderTime" column="order_time"/>
+			<result property="originalPrice" column="original_price"/>
+			<result property="payPrice" column="pay_price"/>
+			<result property="payTime" column="pay_time"/>
+			<result property="payType" column="pay_type"/>
+			<result property="prepayId" column="prepay_id"/>
+			<result property="realPay" column="real_pay"/>
+			<result property="refundTime" column="refund_time"/>
+			<result property="signingTime" column="signing_time"/>
+			<result property="state" column="state"/>
+			<result property="successTime" column="success_time"/>
+			<result property="systemRemark" column="system_remark"/>
+			<result property="userDeleted" column="user_deleted"/>
+			<result property="userDeletedTime" column="user_deleted_time"/>
+			<result property="userId" column="user_id"/>
+			<result property="userRemark" column="user_remark"/>
+			<result property="invoice" column="invoice"/>
+			<result property="payFor" column="pay_for"/>
+			<result property="type" column="type"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="TblOrder_columns">
+	    <![CDATA[
+			`id`, 			
+			`create_time`, 			
+			`deleted`, 			
+			`operator_id`, 			
+			`operator_name`, 			
+			`update_time`, 			
+			`buy_num`, 			
+			`cancel_reason`, 			
+			`cancel_time`, 			
+			`cancel_type`, 			
+			`collage_id`, 			
+			`collage_max_num`, 			
+			`collage_min_num`, 			
+			`coupon_pay`, 			
+			`delivery_time`, 			
+			`freight`, 			
+			`gold_pay`, 			
+			`integral_pay`, 			
+			`money_pay`, 			
+			`order_time`, 			
+			`original_price`, 			
+			`pay_price`, 			
+			`pay_time`, 			
+			`pay_type`, 			
+			`prepay_id`, 			
+			`real_pay`, 			
+			`refund_time`, 			
+			`signing_time`, 			
+			`state`, 			
+			`success_time`, 			
+			`system_remark`, 			
+			`user_deleted`, 			
+			`user_deleted_time`, 			
+			`user_id`, 			
+			`user_remark`, 			
+			`invoice`, 			
+			`pay_for`, 			
+			`type`			
+	    ]]>
+	</sql>
+	
+	<!-- 用于where查询公用抽取的列 -->
+	<sql id="TblOrder_condition">
+		<where>
+        <trim suffix="" suffixOverrides="and">
+			<if test="createTime != null and createTime != 0 ">
+				`create_time` = #{createTime} and 			
+			</if>
+			<if test="deleted != null and deleted != 0 ">
+				`deleted` = #{deleted} and 			
+			</if>
+			<if test="operatorId != null and operatorId != 0 ">
+				`operator_id` = #{operatorId} and 			
+			</if>
+			<if test="operatorName != null and operatorName != ''">
+				`operator_name` = #{operatorName} and 			
+			</if>
+			<if test="updateTime != null and updateTime != 0 ">
+				`update_time` = #{updateTime} and 			
+			</if>
+			<if test="buyNum != null and buyNum != 0 ">
+				`buy_num` = #{buyNum} and 			
+			</if>
+			<if test="cancelReason != null and cancelReason != ''">
+				`cancel_reason` = #{cancelReason} and 			
+			</if>
+			<if test="cancelTime != null and cancelTime != 0 ">
+				`cancel_time` = #{cancelTime} and 			
+			</if>
+			<if test="cancelType != null and cancelType != 0 ">
+				`cancel_type` = #{cancelType} and 			
+			</if>
+			<if test="collageId != null and collageId != 0 ">
+				`collage_id` = #{collageId} and 			
+			</if>
+			<if test="collageMaxNum != null and collageMaxNum != 0 ">
+				`collage_max_num` = #{collageMaxNum} and 			
+			</if>
+			<if test="collageMinNum != null and collageMinNum != 0 ">
+				`collage_min_num` = #{collageMinNum} and 			
+			</if>
+			<if test="couponPay != null and couponPay != 0 ">
+				`coupon_pay` = #{couponPay} and 			
+			</if>
+			<if test="deliveryTime != null and deliveryTime != 0 ">
+				`delivery_time` = #{deliveryTime} and 			
+			</if>
+			<if test="freight != null and freight != 0 ">
+				`freight` = #{freight} and 			
+			</if>
+			<if test="goldPay != null and goldPay != 0 ">
+				`gold_pay` = #{goldPay} and 			
+			</if>
+			<if test="integralPay != null and integralPay != 0 ">
+				`integral_pay` = #{integralPay} and 			
+			</if>
+			<if test="moneyPay != null and moneyPay != 0 ">
+				`money_pay` = #{moneyPay} and 			
+			</if>
+			<if test="orderTime != null and orderTime != 0 ">
+				`order_time` = #{orderTime} and 			
+			</if>
+			<if test="originalPrice != null and originalPrice != 0 ">
+				`original_price` = #{originalPrice} and 			
+			</if>
+			<if test="payPrice != null and payPrice != 0 ">
+				`pay_price` = #{payPrice} and 			
+			</if>
+			<if test="payTime != null and payTime != 0 ">
+				`pay_time` = #{payTime} and 			
+			</if>
+			<if test="payType != null and payType != 0 ">
+				`pay_type` = #{payType} and 			
+			</if>
+			<if test="prepayId != null and prepayId != ''">
+				`prepay_id` = #{prepayId} and 			
+			</if>
+			<if test="realPay != null and realPay != 0 ">
+				`real_pay` = #{realPay} and 			
+			</if>
+			<if test="refundTime != null and refundTime != 0 ">
+				`refund_time` = #{refundTime} and 			
+			</if>
+			<if test="signingTime != null and signingTime != 0 ">
+				`signing_time` = #{signingTime} and 			
+			</if>
+			<if test="state != null and state != 0 ">
+				`state` = #{state} and 			
+			</if>
+			<if test="successTime != null and successTime != 0 ">
+				`success_time` = #{successTime} and 			
+			</if>
+			<if test="systemRemark != null and systemRemark != ''">
+				`system_remark` = #{systemRemark} and 			
+			</if>
+			<if test="userDeleted != null and userDeleted != 0 ">
+				`user_deleted` = #{userDeleted} and 			
+			</if>
+			<if test="userDeletedTime != null and userDeletedTime != 0 ">
+				`user_deleted_time` = #{userDeletedTime} and 			
+			</if>
+			<if test="userId != null and userId != 0 ">
+				`user_id` = #{userId} and 			
+			</if>
+			<if test="userRemark != null and userRemark != ''">
+				`user_remark` = #{userRemark} and 			
+			</if>
+			<if test="invoice != null and invoice != 0 ">
+				`invoice` = #{invoice} and 			
+			</if>
+			<if test="payFor != null and payFor != 0 ">
+				`pay_for` = #{payFor} and 			
+			</if>
+			<if test="type != null and type != 0 ">
+				`type` = #{type}			
+			</if>
+        </trim>
+		</where>
+	</sql>
+	
+	<select id="queryObject" resultMap="RM_TblOrder">
+		select 
+		<include refid="TblOrder_columns" />
+		from tbl_order 
+		where
+		id = #{value}
+	</select>
+
+	<select id="queryList" resultMap="RM_TblOrder">
+		select 
+		<include refid="TblOrder_columns" />
+		from tbl_order
+		<include refid="TblOrder_condition"/> 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="java.lang.Integer">
+		select 
+		count(1) 
+		from tbl_order 
+		<include refid="TblOrder_condition"/>
+	</select>
+	 
+	<insert id="save" parameterType="com.entity.TblOrder">
+		insert into tbl_order
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="id !=null and id != 0 ">
+				id, 			
+			</if>
+			<if test="createTime !=null and createTime != 0 ">
+				create_time, 			
+			</if>
+			<if test="deleted !=null and deleted != 0 ">
+				deleted, 			
+			</if>
+			<if test="operatorId !=null and operatorId != 0 ">
+				operator_id, 			
+			</if>
+			<if test="operatorName !=null and operatorName != ''">
+				operator_name, 			
+			</if>
+			<if test="updateTime !=null and updateTime != 0 ">
+				update_time, 			
+			</if>
+			<if test="buyNum !=null and buyNum != 0 ">
+				buy_num, 			
+			</if>
+			<if test="cancelReason !=null and cancelReason != ''">
+				cancel_reason, 			
+			</if>
+			<if test="cancelTime !=null and cancelTime != 0 ">
+				cancel_time, 			
+			</if>
+			<if test="cancelType !=null and cancelType != 0 ">
+				cancel_type, 			
+			</if>
+			<if test="collageId !=null and collageId != 0 ">
+				collage_id, 			
+			</if>
+			<if test="collageMaxNum !=null and collageMaxNum != 0 ">
+				collage_max_num, 			
+			</if>
+			<if test="collageMinNum !=null and collageMinNum != 0 ">
+				collage_min_num, 			
+			</if>
+			<if test="couponPay !=null and couponPay != 0 ">
+				coupon_pay, 			
+			</if>
+			<if test="deliveryTime !=null and deliveryTime != 0 ">
+				delivery_time, 			
+			</if>
+			<if test="freight !=null and freight != 0 ">
+				freight, 			
+			</if>
+			<if test="goldPay !=null and goldPay != 0 ">
+				gold_pay, 			
+			</if>
+			<if test="integralPay !=null and integralPay != 0 ">
+				integral_pay, 			
+			</if>
+			<if test="moneyPay !=null and moneyPay != 0 ">
+				money_pay, 			
+			</if>
+			<if test="orderTime !=null and orderTime != 0 ">
+				order_time, 			
+			</if>
+			<if test="originalPrice !=null and originalPrice != 0 ">
+				original_price, 			
+			</if>
+			<if test="payPrice !=null and payPrice != 0 ">
+				pay_price, 			
+			</if>
+			<if test="payTime !=null and payTime != 0 ">
+				pay_time, 			
+			</if>
+			<if test="payType !=null and payType != 0 ">
+				pay_type, 			
+			</if>
+			<if test="prepayId !=null and prepayId != ''">
+				prepay_id, 			
+			</if>
+			<if test="realPay !=null and realPay != 0 ">
+				real_pay, 			
+			</if>
+			<if test="refundTime !=null and refundTime != 0 ">
+				refund_time, 			
+			</if>
+			<if test="signingTime !=null and signingTime != 0 ">
+				signing_time, 			
+			</if>
+			<if test="state !=null and state != 0 ">
+				state, 			
+			</if>
+			<if test="successTime !=null and successTime != 0 ">
+				success_time, 			
+			</if>
+			<if test="systemRemark !=null and systemRemark != ''">
+				system_remark, 			
+			</if>
+			<if test="userDeleted !=null and userDeleted != 0 ">
+				user_deleted, 			
+			</if>
+			<if test="userDeletedTime !=null and userDeletedTime != 0 ">
+				user_deleted_time, 			
+			</if>
+			<if test="userId !=null and userId != 0 ">
+				user_id, 			
+			</if>
+			<if test="userRemark !=null and userRemark != ''">
+				user_remark, 			
+			</if>
+			<if test="invoice !=null and invoice != 0 ">
+				invoice, 			
+			</if>
+			<if test="payFor !=null and payFor != 0 ">
+				pay_for, 			
+			</if>
+			<if test="type !=null and type != 0 ">
+				type			
+			</if>
+	     </trim>
+		)
+		values
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="id !=null and id != 0 ">
+				#{id}, 			
+			</if>
+			<if test="createTime !=null and createTime != 0 ">
+				#{createTime}, 			
+			</if>
+			<if test="deleted !=null and deleted != 0 ">
+				#{deleted}, 			
+			</if>
+			<if test="operatorId !=null and operatorId != 0 ">
+				#{operatorId}, 			
+			</if>
+			<if test="operatorName !=null and operatorName != ''">
+				#{operatorName}, 			
+			</if>
+			<if test="updateTime !=null and updateTime != 0 ">
+				#{updateTime}, 			
+			</if>
+			<if test="buyNum !=null and buyNum != 0 ">
+				#{buyNum}, 			
+			</if>
+			<if test="cancelReason !=null and cancelReason != ''">
+				#{cancelReason}, 			
+			</if>
+			<if test="cancelTime !=null and cancelTime != 0 ">
+				#{cancelTime}, 			
+			</if>
+			<if test="cancelType !=null and cancelType != 0 ">
+				#{cancelType}, 			
+			</if>
+			<if test="collageId !=null and collageId != 0 ">
+				#{collageId}, 			
+			</if>
+			<if test="collageMaxNum !=null and collageMaxNum != 0 ">
+				#{collageMaxNum}, 			
+			</if>
+			<if test="collageMinNum !=null and collageMinNum != 0 ">
+				#{collageMinNum}, 			
+			</if>
+			<if test="couponPay !=null and couponPay != 0 ">
+				#{couponPay}, 			
+			</if>
+			<if test="deliveryTime !=null and deliveryTime != 0 ">
+				#{deliveryTime}, 			
+			</if>
+			<if test="freight !=null and freight != 0 ">
+				#{freight}, 			
+			</if>
+			<if test="goldPay !=null and goldPay != 0 ">
+				#{goldPay}, 			
+			</if>
+			<if test="integralPay !=null and integralPay != 0 ">
+				#{integralPay}, 			
+			</if>
+			<if test="moneyPay !=null and moneyPay != 0 ">
+				#{moneyPay}, 			
+			</if>
+			<if test="orderTime !=null and orderTime != 0 ">
+				#{orderTime}, 			
+			</if>
+			<if test="originalPrice !=null and originalPrice != 0 ">
+				#{originalPrice}, 			
+			</if>
+			<if test="payPrice !=null and payPrice != 0 ">
+				#{payPrice}, 			
+			</if>
+			<if test="payTime !=null and payTime != 0 ">
+				#{payTime}, 			
+			</if>
+			<if test="payType !=null and payType != 0 ">
+				#{payType}, 			
+			</if>
+			<if test="prepayId !=null and prepayId != ''">
+				#{prepayId}, 			
+			</if>
+			<if test="realPay !=null and realPay != 0 ">
+				#{realPay}, 			
+			</if>
+			<if test="refundTime !=null and refundTime != 0 ">
+				#{refundTime}, 			
+			</if>
+			<if test="signingTime !=null and signingTime != 0 ">
+				#{signingTime}, 			
+			</if>
+			<if test="state !=null and state != 0 ">
+				#{state}, 			
+			</if>
+			<if test="successTime !=null and successTime != 0 ">
+				#{successTime}, 			
+			</if>
+			<if test="systemRemark !=null and systemRemark != ''">
+				#{systemRemark}, 			
+			</if>
+			<if test="userDeleted !=null and userDeleted != 0 ">
+				#{userDeleted}, 			
+			</if>
+			<if test="userDeletedTime !=null and userDeletedTime != 0 ">
+				#{userDeletedTime}, 			
+			</if>
+			<if test="userId !=null and userId != 0 ">
+				#{userId}, 			
+			</if>
+			<if test="userRemark !=null and userRemark != ''">
+				#{userRemark}, 			
+			</if>
+			<if test="invoice !=null and invoice != 0 ">
+				#{invoice}, 			
+			</if>
+			<if test="payFor !=null and payFor != 0 ">
+				#{payFor}, 			
+			</if>
+			<if test="type !=null and type != 0 ">
+				#{type}			
+			</if>
+	     </trim>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.entity.TblOrder">
+		update tbl_order 
+		<set>
+			<if test="createTime != null and createTime != 0 ">
+				`create_time` = #{createTime}, 			
+			</if>
+			<if test="deleted != null and deleted != 0 ">
+				`deleted` = #{deleted}, 			
+			</if>
+			<if test="operatorId != null and operatorId != 0 ">
+				`operator_id` = #{operatorId}, 			
+			</if>
+			<if test="operatorName != null and operatorName != ''">
+				`operator_name` = #{operatorName}, 			
+			</if>
+			<if test="updateTime != null and updateTime != 0 ">
+				`update_time` = #{updateTime}, 			
+			</if>
+			<if test="buyNum != null and buyNum != 0 ">
+				`buy_num` = #{buyNum}, 			
+			</if>
+			<if test="cancelReason != null and cancelReason != ''">
+				`cancel_reason` = #{cancelReason}, 			
+			</if>
+			<if test="cancelTime != null and cancelTime != 0 ">
+				`cancel_time` = #{cancelTime}, 			
+			</if>
+			<if test="cancelType != null and cancelType != 0 ">
+				`cancel_type` = #{cancelType}, 			
+			</if>
+			<if test="collageId != null and collageId != 0 ">
+				`collage_id` = #{collageId}, 			
+			</if>
+			<if test="collageMaxNum != null and collageMaxNum != 0 ">
+				`collage_max_num` = #{collageMaxNum}, 			
+			</if>
+			<if test="collageMinNum != null and collageMinNum != 0 ">
+				`collage_min_num` = #{collageMinNum}, 			
+			</if>
+			<if test="couponPay != null and couponPay != 0 ">
+				`coupon_pay` = #{couponPay}, 			
+			</if>
+			<if test="deliveryTime != null and deliveryTime != 0 ">
+				`delivery_time` = #{deliveryTime}, 			
+			</if>
+			<if test="freight != null and freight != 0 ">
+				`freight` = #{freight}, 			
+			</if>
+			<if test="goldPay != null and goldPay != 0 ">
+				`gold_pay` = #{goldPay}, 			
+			</if>
+			<if test="integralPay != null and integralPay != 0 ">
+				`integral_pay` = #{integralPay}, 			
+			</if>
+			<if test="moneyPay != null and moneyPay != 0 ">
+				`money_pay` = #{moneyPay}, 			
+			</if>
+			<if test="orderTime != null and orderTime != 0 ">
+				`order_time` = #{orderTime}, 			
+			</if>
+			<if test="originalPrice != null and originalPrice != 0 ">
+				`original_price` = #{originalPrice}, 			
+			</if>
+			<if test="payPrice != null and payPrice != 0 ">
+				`pay_price` = #{payPrice}, 			
+			</if>
+			<if test="payTime != null and payTime != 0 ">
+				`pay_time` = #{payTime}, 			
+			</if>
+			<if test="payType != null and payType != 0 ">
+				`pay_type` = #{payType}, 			
+			</if>
+			<if test="prepayId != null and prepayId != ''">
+				`prepay_id` = #{prepayId}, 			
+			</if>
+			<if test="realPay != null and realPay != 0 ">
+				`real_pay` = #{realPay}, 			
+			</if>
+			<if test="refundTime != null and refundTime != 0 ">
+				`refund_time` = #{refundTime}, 			
+			</if>
+			<if test="signingTime != null and signingTime != 0 ">
+				`signing_time` = #{signingTime}, 			
+			</if>
+			<if test="state != null and state != 0 ">
+				`state` = #{state}, 			
+			</if>
+			<if test="successTime != null and successTime != 0 ">
+				`success_time` = #{successTime}, 			
+			</if>
+			<if test="systemRemark != null and systemRemark != ''">
+				`system_remark` = #{systemRemark}, 			
+			</if>
+			<if test="userDeleted != null and userDeleted != 0 ">
+				`user_deleted` = #{userDeleted}, 			
+			</if>
+			<if test="userDeletedTime != null and userDeletedTime != 0 ">
+				`user_deleted_time` = #{userDeletedTime}, 			
+			</if>
+			<if test="userId != null and userId != 0 ">
+				`user_id` = #{userId}, 			
+			</if>
+			<if test="userRemark != null and userRemark != ''">
+				`user_remark` = #{userRemark}, 			
+			</if>
+			<if test="invoice != null and invoice != 0 ">
+				`invoice` = #{invoice}, 			
+			</if>
+			<if test="payFor != null and payFor != 0 ">
+				`pay_for` = #{payFor}, 			
+			</if>
+			<if test="type != null and type != 0 ">
+				`type` = #{type}			
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from tbl_order where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from tbl_order where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

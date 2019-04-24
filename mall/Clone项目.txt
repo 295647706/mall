@@ -1,0 +1,11 @@
+File -> Import -> Git -> Projects from Git -> Clone URI
+然后在弹出窗上填URI、User和Password，点击Next，选项分支，点击Next
+然后在弹出窗上选择存放项目的目录Browse，点击Next，Improt as general project，点击Next，点击Finish
+此时已经把远程库上的项目克隆到本地了。
+
+如果项目是Maven项目的话，克隆本地后会发现不见了M图标，右键项目也没有Maven菜单
+如果项目也是Spring boot项目的话，克隆本地后也会发现不见了S图标，找到主类(main)后也运行不了
+
+解决：
+右键项目 -> Delete(注意不要选上Delete project contents on disk选项) -> OK
+然后File -> Import -> Maven -> Existing Maven Projects -> Next -> Browse -> 选项上面克隆下来的项目 -> Finish

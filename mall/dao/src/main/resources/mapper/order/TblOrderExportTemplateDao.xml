@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.order.TblOrderExportTemplateDao">
+	
+	<resultMap id="RM_TblOrderExportTemplate" type="com.entity.TblOrderExportTemplate">
+			<result property="id" column="id"/>
+			<result property="createTime" column="create_time"/>
+			<result property="deleted" column="deleted"/>
+			<result property="operatorId" column="operator_id"/>
+			<result property="operatorName" column="operator_name"/>
+			<result property="updateTime" column="update_time"/>
+			<result property="columns" column="columns"/>
+			<result property="name" column="name"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="TblOrderExportTemplate_columns">
+	    <![CDATA[
+			`id`, 			
+			`create_time`, 			
+			`deleted`, 			
+			`operator_id`, 			
+			`operator_name`, 			
+			`update_time`, 			
+			`columns`, 			
+			`name`			
+	    ]]>
+	</sql>
+	
+	<!-- 用于where查询公用抽取的列 -->
+	<sql id="TblOrderExportTemplate_condition">
+		<where>
+        <trim suffix="" suffixOverrides="and">
+			<if test="createTime != null and createTime != 0 ">
+				`create_time` = #{createTime} and 			
+			</if>
+			<if test="deleted != null and deleted != 0 ">
+				`deleted` = #{deleted} and 			
+			</if>
+			<if test="operatorId != null and operatorId != 0 ">
+				`operator_id` = #{operatorId} and 			
+			</if>
+			<if test="operatorName != null and operatorName != ''">
+				`operator_name` = #{operatorName} and 			
+			</if>
+			<if test="updateTime != null and updateTime != 0 ">
+				`update_time` = #{updateTime} and 			
+			</if>
+			<if test="columns != null and columns != ''">
+				`columns` = #{columns} and 			
+			</if>
+			<if test="name != null and name != ''">
+				`name` = #{name}			
+			</if>
+        </trim>
+		</where>
+	</sql>
+	
+	<select id="queryObject" resultMap="RM_TblOrderExportTemplate">
+		select 
+		<include refid="TblOrderExportTemplate_columns" />
+		from tbl_order_export_template 
+		where
+		id = #{value}
+	</select>
+
+	<select id="queryList" resultMap="RM_TblOrderExportTemplate">
+		select 
+		<include refid="TblOrderExportTemplate_columns" />
+		from tbl_order_export_template
+		<include refid="TblOrderExportTemplate_condition"/> 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="java.lang.Integer">
+		select 
+		count(1) 
+		from tbl_order_export_template 
+		<include refid="TblOrderExportTemplate_condition"/>
+	</select>
+	 
+	<insert id="save" parameterType="com.entity.TblOrderExportTemplate">
+		insert into tbl_order_export_template
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="id !=null and id != 0 ">
+				id, 			
+			</if>
+			<if test="createTime !=null and createTime != 0 ">
+				create_time, 			
+			</if>
+			<if test="deleted !=null and deleted != 0 ">
+				deleted, 			
+			</if>
+			<if test="operatorId !=null and operatorId != 0 ">
+				operator_id, 			
+			</if>
+			<if test="operatorName !=null and operatorName != ''">
+				operator_name, 			
+			</if>
+			<if test="updateTime !=null and updateTime != 0 ">
+				update_time, 			
+			</if>
+			<if test="columns !=null and columns != ''">
+				columns, 			
+			</if>
+			<if test="name !=null and name != ''">
+				name			
+			</if>
+	     </trim>
+		)
+		values
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="id !=null and id != 0 ">
+				#{id}, 			
+			</if>
+			<if test="createTime !=null and createTime != 0 ">
+				#{createTime}, 			
+			</if>
+			<if test="deleted !=null and deleted != 0 ">
+				#{deleted}, 			
+			</if>
+			<if test="operatorId !=null and operatorId != 0 ">
+				#{operatorId}, 			
+			</if>
+			<if test="operatorName !=null and operatorName != ''">
+				#{operatorName}, 			
+			</if>
+			<if test="updateTime !=null and updateTime != 0 ">
+				#{updateTime}, 			
+			</if>
+			<if test="columns !=null and columns != ''">
+				#{columns}, 			
+			</if>
+			<if test="name !=null and name != ''">
+				#{name}			
+			</if>
+	     </trim>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.entity.TblOrderExportTemplate">
+		update tbl_order_export_template 
+		<set>
+			<if test="createTime != null and createTime != 0 ">
+				`create_time` = #{createTime}, 			
+			</if>
+			<if test="deleted != null and deleted != 0 ">
+				`deleted` = #{deleted}, 			
+			</if>
+			<if test="operatorId != null and operatorId != 0 ">
+				`operator_id` = #{operatorId}, 			
+			</if>
+			<if test="operatorName != null and operatorName != ''">
+				`operator_name` = #{operatorName}, 			
+			</if>
+			<if test="updateTime != null and updateTime != 0 ">
+				`update_time` = #{updateTime}, 			
+			</if>
+			<if test="columns != null and columns != ''">
+				`columns` = #{columns}, 			
+			</if>
+			<if test="name != null and name != ''">
+				`name` = #{name}			
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from tbl_order_export_template where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from tbl_order_export_template where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
